@@ -17,7 +17,7 @@ public class ExpenseControllers {
     private ExpenseService expenseService;
 
     @GetMapping(path = "/getExpense")
-    public ResponseEntity<List<ExpenseDto>> getExpense(@RequestHeader(value = "x-user-id") @NonNull String userId){
+    public ResponseEntity<List<ExpenseDto>> getExpense(@RequestHeader(value = "X-User-Id") @NonNull String userId){
         try{
             List<ExpenseDto> expenseDtoList = expenseService.getExpense(userId);
             return new ResponseEntity<>(expenseDtoList, HttpStatus.OK);
@@ -27,12 +27,12 @@ public class ExpenseControllers {
     }
 
     @PostMapping(path="/addExpense")
-    public ResponseEntity<Boolean> addExpenses(@RequestHeader(value = "x-user-id") @NonNull String userId, ExpenseDto expenseDto){
+    public ResponseEntity<?> addExpenses(@RequestHeader(value = "X-User-Id") @NonNull String userId,@RequestBody ExpenseDto expenseDto){
         try{
             expenseDto.setUserId(userId);
             return new ResponseEntity<>(expenseService.createExpense(expenseDto), HttpStatus.OK);
         }catch (Exception ex){
-            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ex, HttpStatus.BAD_REQUEST);
         }
     }
 }

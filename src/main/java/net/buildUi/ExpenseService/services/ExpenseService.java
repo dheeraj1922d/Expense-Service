@@ -23,7 +23,7 @@ public class ExpenseService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public Boolean createExpense(ExpenseDto expenseDto){
+    public Boolean createExpense(ExpenseDto expenseDto) throws Exception {
         if(Objects.isNull(expenseDto.getCurrency())){
             expenseDto.setCurrency("inr");
         }
@@ -32,7 +32,7 @@ public class ExpenseService {
             expenseRepository.save(objectMapper.convertValue(expenseDto , Expense.class));
             return true;
         }catch (Exception e){
-            return false;
+            throw new Exception(e);
         }
     }
 

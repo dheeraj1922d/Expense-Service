@@ -17,21 +17,29 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(value = "id")
     private Long id;
 
+    @JsonProperty(value = "expense_id")
     private String expenseId;
 
+    @JsonProperty(value = "amount")
     private String amount;
 
+    @JsonProperty(value = "user_id")
     private String userId;
 
+    @JsonProperty(value = "merchant")
     private String merchant;
 
+    @JsonProperty(value = "currency")
     private String currency;
 
+    @JsonProperty(value = "created_at")
     private Timestamp createdAt;
 
     @PrePersist
