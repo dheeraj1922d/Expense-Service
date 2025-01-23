@@ -35,4 +35,9 @@ public class ExpenseControllers {
             return new ResponseEntity<>(ex, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<Boolean> health(){
+        return new ResponseEntity<>(true , HttpStatus.OK);
+    }
 }
